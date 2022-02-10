@@ -1,12 +1,13 @@
 const baseUrl = 'https://api.petfinder.com/v2/animals';
-//const urlByType = `https://api.petfinder.com/v2/types/${type}`;
+const urlByType = `https://api.petfinder.com/v2/types/`;
 const urlToFindTypes = 'https://api.petfinder.com/v2/types';
 const animalsParent = document.querySelector('.animals-parent');
+const typeButtonsContainer = document.querySelector('.type-buttons-container');
 
 const token = {
   "token_type":"Bearer",
   "expires_in":3600,
-  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImNkMzRhYzZiMDhlNjU3Y2ZiMjNhODdkODNiMzhhYjhkMWJjY2YxN2ZiZWE2YmEzODAxNzk3MjUyOGNhODdjNTA3OTM4MTEzMGU5MzI2MWVkIiwiaWF0IjoxNjQ0NTMyNzA3LCJuYmYiOjE2NDQ1MzI3MDcsImV4cCI6MTY0NDUzNjMwNywic3ViIjoiIiwic2NvcGVzIjpbXX0.WqfTdTjzLBNE2xs8vtWgiYKfrGPaZB_zU0Ojuwd_ckDPw_FN91c5h90LyT9tWY6xCGyvim4BeQeP0AedyqNpmUtyLottQiUqJUUvQtXTfIRvXX4hY2x0hitoX5lTIBRXp7ixyqs2S4U9jZWjO2EisfcG68Ro9ft5luSFb2rGWdjd0zuZL85q3DDcdkt3zfd8Zjq-W84qFHW6CxLCGIQAjEALzYoga-atme0ean52HCCZrPmq06iZyfajMkE6zvc6G2KU1KeGBQlw_1Enimk_NtyT7exW-scOgMaUNOE-gcguj8c2w4OQ9nRPy6HF1X7OKZFtCARjbvGLu4B_rRcXNA"
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjMwODE2ZDAwYTFmNzM3NWM1YjY5MmI1ZjhkODI1NTZmY2RjMTNhMGYyMjFlZThlMTRjMDMxNTU5YWVlMmU2N2Q2NjM5Zjg0M2VjNDNmNTM4IiwiaWF0IjoxNjQ0NTMzNzAxLCJuYmYiOjE2NDQ1MzM3MDEsImV4cCI6MTY0NDUzNzMwMSwic3ViIjoiIiwic2NvcGVzIjpbXX0.k8T4Gh09Bfg1phVO2tdxWxK8_O3dEmizC2y4lNlJ5UECNNEKuFOlr93fxQvpDoF1pl7th_LwoPRCrlvKlGccHjV88Zv_a7m0M0CYoBsbN2ee4dPSWC0EG0pPdAOs_xYIvnchs1rvA20ICwgBoOz5EFspBPaXteC4_Vt11F90pbN5W5-jsKIxb5bSMqmy8UplxJ3sKvIp8agkCfH_MFpLkpLy_48m08TVt6HwTYH31HgpWFNLaD4FZWzFn9Ouxb1WshGTBWsrZfok9rdQjXciRILdxDkZXwu2VVQHLi1w2Y0ZxKIszWRx89SYHUnbLIXaP2G1jJmbHMw4pbsd5Tj69w"
 }
 
 //REQUESTS
@@ -25,6 +26,19 @@ const fetchApi = async (url) => {
   } catch (error) {
     animalsParent.innerHTML = 'Banco de dados fora do ar...'
   }
+}
+
+const getAnimalTypes = async () => {
+  const requestInfo = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token.access_token}`,
+    }
+  }
+  const response = await fetch(urlToFindTypes, requestInfo);
+  const data = await response.json();
+  const animalTypes = data.types.map((type) => type.name);
+  return animalTypes;
 }
 
 //HELPERS
@@ -50,7 +64,7 @@ const createAnimalTags = (animal) => {
   animalTags.push(createCustomElement('h2', 'animal-name', name));
   if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'animal-photo', animal.name));
   if (description) animalTags.push(createCustomElement('p', 'animal-description', description));
-  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
+  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ', ' + breeds.secondary : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
   animalTags.push(createCustomElement('p', 'animal-description', dataText));
   animalTags.push(createCustomElement('p', 'animal-description', tags.join(',')));
   animalTags.push(createCustomElement('p', 'animal-description', status));
@@ -78,6 +92,13 @@ const getAllAnimals = async () => {
   });
   createAnimalsCards(returnedAnimals);
 }
+
+const createTypeButtons = async () => {
+  const animalTypes = await getAnimalTypes();
+  animalTypes.forEach((type) => typeButtonsContainer.appendChild(createCustomElement('button', 'type-button', type)));
+}
+
+createTypeButtons();
 
 window.onload = async () => {
   animalsParent.innerHTML = '';
