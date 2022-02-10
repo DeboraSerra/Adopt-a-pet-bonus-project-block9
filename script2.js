@@ -37,8 +37,7 @@ const getAnimalTypes = async () => {
   }
   const response = await fetch(urlToFindTypes, requestInfo);
   const data = await response.json();
-  const animalTypes = data.types.map((type) => type.name);
-  return animalTypes;
+  return data;
 }
 
 //HELPERS
@@ -94,7 +93,8 @@ const getAllAnimals = async () => {
 }
 
 const createTypeButtons = async () => {
-  const animalTypes = await getAnimalTypes();
+  const data = await getAnimalTypes();
+  const animalTypes = data.types.map((type) => type.name)
   animalTypes.forEach((type) => typeButtonsContainer.appendChild(createCustomElement('button', 'type-button', type)));
 }
 
