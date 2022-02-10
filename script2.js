@@ -83,6 +83,7 @@ window.onload = async () => {
   animalsParent.innerHTML = '';
   getAllAnimals();
 }
+
 /*
     "animals": [
         {
