@@ -151,6 +151,7 @@ module.exports = {
   createTypeButtons,
   getAllAnimals
 }
+
 /*
     "animals": [
         {
