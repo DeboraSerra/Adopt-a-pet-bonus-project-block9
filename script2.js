@@ -4,10 +4,9 @@ const animalsParent = document.querySelector('.animals-parent');
 const typeButtonsContainer = document.querySelector('.type-buttons-container');
 
 const token = {
-  token_type: 'Bearer',
-  expires_in: 3600,
-  access_token:
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjVhNDg5MWU0N2M3MDdlYmE5OTg1YWRjMjc4YjNmZWEwZjNjYjFjZTg3ZTY3MTY3NzRmZjc4NGI0ZjZmZDAwOTQ2NmE0NDFmMjNhOTdjM2FiIiwiaWF0IjoxNjQ0NTkyNTU1LCJuYmYiOjE2NDQ1OTI1NTUsImV4cCI6MTY0NDU5NjE1NSwic3ViIjoiIiwic2NvcGVzIjpbXX0.JqYHI--5xuJPJ9ZpKHQLn2rm8m6-ABR64L-3-pp55kSVeNwPBpT3l1WNpU6WG8ku3w75SYRU_TZ6NJnO_TYixfEpWHJp6CKQnQsSGg7-qOQZz1H_5LY2OQ0t2quXQROZ9ve3eFkXF-Ff-gvowp2-uKiNGBRrxSRESxM2w_XM0MrEsE8M0Fhafl4RrCjmj3Eu0WtaU5UEiGOp90TtYrGeG70Zzq0cskEl4ZVxaMw7NbEyDvplC6LJmZ_ZaDBtBo6B0UxDyl9mlqmw64CE2q7eCY5wxa-A4uD2YusU1xhvxYJlR1b0qYPsASGnibVys5vcg4V-8EhFLWD78odt1oBLIA',
+  "token_type":"Bearer",
+  "expires_in":36000,
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImU0MDIxNzJkODY3OWU0MTE1ZmMzNzBmYzAxN2U2YmQ5OTYyMzExZjU3MmU3ZmJjNDk4MTA3OTkzMTg5YzI5ZjVjYTJiMzdjY2VjYTkwOWI4IiwiaWF0IjoxNjQ0NjEzOTk5LCJuYmYiOjE2NDQ2MTM5OTksImV4cCI6MTY0NDYxNzU5OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.RzR9Qq5f5hYmC_P8m6faarJRf2EFNydK2JEf6ko5w5hljqQ7-aD7zJ7lp-tunvXU846Lu6XU-xM6g_zB7b8yG26xAyF98Lh219gREOlA95Dz9KM7ig1soElCyaJIDdlKdKuPnuhHUEV1UiDVW6gfTX5YrXSohPdr3vuyyeeRbQRGISmbbiF0J9L4_gx5qNgoP0tXgxk7o0dayZmduabQPPgBDiefhJEvmxn2dp2ymk9xZBe4rVMnGEvyymhcdmTwpnuLXQPszDf3XNDRqie4gve1T0-b3LwVLZ-bKv8o4dtInG9EDS1dFN5VOnYZ94YwzNmQfafbxkGR_2eudDuSCA",
 };
 
 // REQUESTS
@@ -73,28 +72,14 @@ const createAnimalTags = (animal) => {
     email,
   } = animal;
   const animalTags = [];
-  animalTags.push(createCustomElement('h2', 'animal-name', name));
-  if (photos.length >= 2) {
-    animalTags.push(
-      createImageElement(photos[0].medium, 'animal-photo', animal.name),
-    );
-  }
-  if (description) {
-    animalTags.push(
-      createCustomElement('p', 'animal-description', description),
-    );
-  }
-  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${
-    breeds.secondary ? `, ${breeds.secondary}` : ''
-  }, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
-  animalTags.push(createCustomElement('p', 'animal-description', dataText));
-  animalTags.push(
-    createCustomElement('p', 'animal-description', tags.join(',')),
-  );
-  animalTags.push(createCustomElement('p', 'animal-description', status));
-  animalTags.push(
-    createCustomElement('p', 'animal-contact', `Me adote! ${email}`),
-  );
+  animalTags.push(createCustomElement('h2', 'card-title', name));
+  if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'rounded mx-auto d-block', animal.name));
+  if (description) animalTags.push(createCustomElement('p', 'card-text', description));
+  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ', ' + breeds.secondary : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
+  animalTags.push(createCustomElement('p', 'card-text', dataText));
+  animalTags.push(createCustomElement('p', 'card-text', tags.join(', ')));
+  animalTags.push(createCustomElement('p', 'card-text', status));
+  animalTags.push(createCustomElement('p','btn btn-link', `Me adote! ${email}`));
   return animalTags;
 };
 
@@ -107,12 +92,12 @@ const clearAnimalsCards = () => {
 
 const createAnimalsCards = (array) => {
   array.forEach((animal) => {
-    const newSect = createCustomElement('section', 'animal-card', '');
+    const newSect = createCustomElement('section', 'card-body', '');
     newSect.id = animal.id;
     const animalTags = createAnimalTags(animal);
     animalTags.forEach((eachAnimal) => newSect.appendChild(eachAnimal));
     animalsParent.appendChild(newSect);
-  });
+  })
 };
 
 // HANDLERS
@@ -193,6 +178,7 @@ const getAnimalsByType = async (animalType) => {
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
+
 };
 
 const selectType = (event) => {
@@ -201,18 +187,14 @@ const selectType = (event) => {
 };
 
 const createTypeButtons = async () => {
-  const allButton = createCustomElement(
-    'button',
-    'type-button',
-    'Todos os tipos',
-  );
+  const allButton = createCustomElement('button', 'btn btn-dark', 'Todos os tipos');
   allButton.addEventListener('click', getAllAnimals);
   typeButtonsContainer.appendChild(allButton);
   const data = await getAnimalTypes();
   const animalTypes = data.types.map((type) => type.name);
   const buttons = [];
   animalTypes.forEach((type) => {
-    const button = createCustomElement('button', 'type-button', type);
+    const button = createCustomElement('button', 'btn btn-dark', type);
     button.addEventListener('click', selectType);
     typeButtonsContainer.appendChild(button);
     buttons.push(button.innerText);
@@ -231,7 +213,7 @@ window.onload = async () => {
 module.exports = {
   createAnimalsCards,
   createTypeButtons,
-  getAllAnimals,
+  getAllAnimals
 };
 
 /* 'animals': [
