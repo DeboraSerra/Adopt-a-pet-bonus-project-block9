@@ -140,6 +140,7 @@ window.onload = async () => {
   createTypeButtons();
   getAllAnimals();
 }
+
 /*
     "animals": [
         {
