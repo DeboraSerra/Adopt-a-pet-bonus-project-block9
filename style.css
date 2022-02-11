@@ -2,3 +2,68 @@
   margin: 0;
   padding: 0;
 }
+
+h1 {
+  background-color: rgb(54, 54, 54);
+  text-align: center;
+  margin: 0;
+  color: rgb(248, 244, 244);
+}
+
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999px;
+  box-shadow: 0px 0px 6px 0px rgba(136, 134, 134, 0.5);
+}
+
+footer{
+  background-color: rgb(54, 54, 54);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: rgb(248, 244, 244);
+}
+
+.type-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  background-color: rgb(54, 54, 54);
+  width: 100%;
+}
+
+.btn-dark {
+  margin: 10px;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.animals-parent {
+  padding: 110px;
+  display: flex;
+  max-width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items:stretch;
+}
+
+.card-body {
+  width: 25rem;
+  max-height: 50rem;
+  margin: 8px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  align-self: auto;
+}
+
+.card-text {
+  margin: 15px 35px 8px 35px;
+  text-align: justify;
+}
+
+.d-block {
+  max-height: 40%;
+}

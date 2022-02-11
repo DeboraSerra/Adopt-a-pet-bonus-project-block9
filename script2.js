@@ -6,9 +6,9 @@ const typeButtonsContainer = document.querySelector('.type-buttons-container');
 
 const token = {
   "token_type":"Bearer",
-  "expires_in":3600,
-  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjU1M2NhMzAzODBjNjQxMTE1MTQwMGQ0MDU3NjdkNDA0NWY2OGFiN2Y0OTcxNzAxYWZmYmE4OGRkYzNlOTE5NWNkNjcwOTQyM2M1MDRlODMzIiwiaWF0IjoxNjQ0NjAxMzg5LCJuYmYiOjE2NDQ2MDEzODksImV4cCI6MTY0NDYwNDk4OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.we7P8oGroFPZvD1CXad7iX24mrhIO5Yh5Jo01rOc8Cz-h_ZEd-LnpyNLF-6hAuCZfU4HRxzB5LKKMFFBLwRvrv-_4z_mXEUDYzaIk_VoOL22Rp8uc4zUaRKAnK3JCfVuCIFazcw6gKm0fzp4ma1algPJgbt_lEG9AbWZdF-8B5dajP86H5A4JroLcDkh1fp5uDh_siNzJNlBHEjKTA7_oKtZaER4SSeeN9o2HVi6cgoW0e4cmmb9dHwIsxr_e4OdHtwt3G2VXyPawSRcc-7xUjHahVWhpDdSNUdGtRgboLJ2GA6MKfpTc1hQWy1h1UnX9XOgBVbjKFTXzX95bxepOg",
-}
+  "expires_in":36000,
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImU0MDIxNzJkODY3OWU0MTE1ZmMzNzBmYzAxN2U2YmQ5OTYyMzExZjU3MmU3ZmJjNDk4MTA3OTkzMTg5YzI5ZjVjYTJiMzdjY2VjYTkwOWI4IiwiaWF0IjoxNjQ0NjEzOTk5LCJuYmYiOjE2NDQ2MTM5OTksImV4cCI6MTY0NDYxNzU5OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.RzR9Qq5f5hYmC_P8m6faarJRf2EFNydK2JEf6ko5w5hljqQ7-aD7zJ7lp-tunvXU846Lu6XU-xM6g_zB7b8yG26xAyF98Lh219gREOlA95Dz9KM7ig1soElCyaJIDdlKdKuPnuhHUEV1UiDVW6gfTX5YrXSohPdr3vuyyeeRbQRGISmbbiF0J9L4_gx5qNgoP0tXgxk7o0dayZmduabQPPgBDiefhJEvmxn2dp2ymk9xZBe4rVMnGEvyymhcdmTwpnuLXQPszDf3XNDRqie4gve1T0-b3LwVLZ-bKv8o4dtInG9EDS1dFN5VOnYZ94YwzNmQfafbxkGR_2eudDuSCA",
+};
 
 //REQUESTS
 
@@ -26,7 +26,7 @@ const fetchApi = async (url) => {
   } catch (error) {
     animalsParent.innerHTML = 'Base de dados fora do ar...';
   }
-}
+};
 
 const getAnimalTypes = async () => {
   const requestInfo = {
@@ -38,7 +38,7 @@ const getAnimalTypes = async () => {
   const response = await fetch(urlToFindTypes, requestInfo);
   const data = await response.json();
   return data;
-}
+};
 
 //HELPERS
 
@@ -47,7 +47,7 @@ const createCustomElement = (tagName, elemClass, text) => {
   newTag.className = elemClass;
   newTag.innerText = text;
   return newTag;
-}
+};
 
 const createImageElement = (source, elemClass, alternativeText) => {
   const newImage = document.createElement('img');
@@ -55,38 +55,38 @@ const createImageElement = (source, elemClass, alternativeText) => {
   newImage.className = elemClass;
   newImage.alt = alternativeText;
   return newImage;
-}
+};
 
 const createAnimalTags = (animal) => {
   const {id, type, breeds, age, gender, size, tags, name, description, photos, status, email} = animal;
   const animalTags = [];
-  animalTags.push(createCustomElement('h2', 'animal-name', name));
-  if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'animal-photo', animal.name));
-  if (description) animalTags.push(createCustomElement('p', 'animal-description', description));
+  animalTags.push(createCustomElement('h2', 'card-title', name));
+  if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'rounded mx-auto d-block', animal.name));
+  if (description) animalTags.push(createCustomElement('p', 'card-text', description));
   const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ', ' + breeds.secondary : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
-  animalTags.push(createCustomElement('p', 'animal-description', dataText));
-  animalTags.push(createCustomElement('p', 'animal-description', tags.join(',')));
-  animalTags.push(createCustomElement('p', 'animal-description', status));
-  animalTags.push(createCustomElement('p','animal-contact', `Me adote! ${email}`));
+  animalTags.push(createCustomElement('p', 'card-text', dataText));
+  animalTags.push(createCustomElement('p', 'card-text', tags.join(', ')));
+  animalTags.push(createCustomElement('p', 'card-text', status));
+  animalTags.push(createCustomElement('p','btn btn-link', `Me adote! ${email}`));
   return animalTags;
-}
+};
 
 const clearAnimalsCards = () => {
   const animalsCards = animalsParent.children;
   for(let i = animalsCards.length; i > 0; i -= 1) {
     animalsCards[i-1].remove();
   }
-}
+};
 
 const createAnimalsCards = (array) => {
   array.forEach((animal) => {
-    const newSect = createCustomElement('section', 'animal-card', '');
+    const newSect = createCustomElement('section', 'card-body', '');
     newSect.id = animal.id;
     const animalTags = createAnimalTags(animal);
     animalTags.forEach((animal) => newSect.appendChild(animal));
     animalsParent.appendChild(newSect);
   })
-}
+};
 
 //HANDLERS
 
@@ -100,7 +100,7 @@ const getAllAnimals = async () => {
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
   return returnedAnimals[0];
-}
+};
 
 const getAnimalsByType = async (animalType) => {
   let query = '';
@@ -114,7 +114,7 @@ const getAnimalsByType = async (animalType) => {
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
-}
+};;
 
 const selectType = (event) => {
   const type = event.target.innerText;
@@ -123,20 +123,20 @@ const selectType = (event) => {
   
 
 const createTypeButtons = async () => {
-  const allButton = createCustomElement('button', 'type-button', 'Todos os tipos');
+  const allButton = createCustomElement('button', 'btn btn-dark', 'Todos os tipos');
   allButton.addEventListener('click', getAllAnimals);
   typeButtonsContainer.appendChild(allButton);
   const data = await getAnimalTypes();
   const animalTypes = data.types.map((type) => type.name)
   const buttons = [];
   animalTypes.forEach((type) => {
-    const button = createCustomElement('button', 'type-button', type);
+    const button = createCustomElement('button', 'btn btn-dark', type);
     button.addEventListener('click', selectType);
     typeButtonsContainer.appendChild(button);
     buttons.push(button.innerText)
   });
   return { animalTypes, buttons };
-}
+};
 
 //createTypeButtons();
 
@@ -144,13 +144,13 @@ window.onload = async () => {
   animalsParent.innerHTML = '';
   createTypeButtons();
   getAllAnimals();
-}
+};
 
 module.exports = {
   createAnimalsCards,
   createTypeButtons,
   getAllAnimals
-}
+};
 
 /*
     "animals": [
