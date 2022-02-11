@@ -17,7 +17,56 @@
   <main class="animals-parent">
 
   </main>
-  <section class="form-section"></section>
+  <section class="form-section">
+    <h1>Preencha o Formulário de Adoção</h1>
+	<form action="" method="GET">
+		<fieldset>
+			<legend>Dados Do Interessado:</legend>
+			<label for="name">Nome Completo:</label>
+			<input type="text" id="name" required autofocus>
+
+			<label for="email">E-mail:</label>
+			<input type="email" id="email" required>
+
+			<label for="endereco">Endereço:</label>
+			<input type="text" id="endereco" required>
+
+			<label for="casa">
+				<input type="radio" name="moradia" id="casa" value="Casa" checked>Casa</label>
+
+			<label for="apartamento">
+				<input type="radio" name="moradia" id="apartamento" value="Apartamento">Apartamento</label>
+
+			<label for="sitio">
+				<input type="radio" name="moradia" id="sitio" value="Sitio">Sítio/Chácara</label>
+
+			<p> Você já possui/possuiu algum pet?
+			<label for="sim">
+				<input type="radio" id="sim" name="option" required value="sim">Sim</label>
+
+			<label for="nao">
+				<input name="option" type="radio" id="nao" required value="nao">Não</label>
+			</p>
+
+			<textarea name="obs" id="" cols="30" rows="10" placeholder="O que te fez querer adotar esse Pet?"></textarea>
+		</fieldset>
+		<fieldset>
+			<legend>Dados do Pet:</legend>
+			<label for="name-pet">Nome: <input type="text" id="name-pet" disabled></label>
+			<label for="id-pet">Id: <input type="text" id="id-pet" disabled></label>
+			<label for="especie-pet">Espécie: <input type="text" id="especie-pet" disabled></label>
+			<label for="raça-pet">Raça: <input type="text" disabled id="raça-pet"></label>
+			<label for="idade-pet">Idade: <input type="text" disabled id="idade-pet"></label>
+			<label for="genero-pet">Gênero: <input disabled id="genero-pet" type="text"></label>
+			<label for="porte-pet">Porte: <input disabled id="port-pet" type="text"></label>
+		</fieldset>
+
+		<label for="confirmacao"><input type="checkbox" id="confirmacao" required>Confirmo que todos os dados acima são
+			verídicos</label>
+
+		<button type="submit">ENVIAR FORMULÁRIO</button>
+	</form>
+  </section>
   <footer>
     <h3>Site desenvolvido por <a href="https://github.com/DeboraSerra/Recipe-app-bonus-project-block9">Uncaught Error</a></h3>
     <p>Informações retiradas de <a href="https://www.petfinder.com/">PetFinder</a></p>
