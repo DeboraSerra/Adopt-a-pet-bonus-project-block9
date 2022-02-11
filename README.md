@@ -57,6 +57,7 @@ Foi então gerada uma chave de cliente e uma chave secreta para acessar a API e 
 
 A aplicação carrega com uma lista de 20 animais de espécies aleatórias e gera botões por espécie de animais. A pessoa ursuária pode então escolher qual o tipo de animal ela quer que apareça na tela.
 Os animmais disponíveis para adoção aparecem em cards com o nome do animal (sendo que algumas vezes pode não ser fornecido, aparecendo um número de identificação ou algo parecido), a foto do animal (quando disponível), a descrição do animal (que pode ter sido fornecida ou não), as informações de idade, tamanho e gênero, algumas tags que descrevem o animal e o email de contato para obter mais informações e adotar o animal.
+O usuário pode, então, clicar no card do animal escolhido e ser redirecionado para o preenchimento de um formulário de adoção responsável.
 
 ______________________________________________________________________________________________________
 
@@ -123,3 +124,5 @@ Then, we generated a client key and a secret key to access the API and started d
 The application loads a list with 20 availablle animals of random species and generate some buttons by specie. Then the user can choose the specie of animal he/she want to appear on screen.
 
 The animals available to adoption appear in cards with the name of the animal (sometimes it appears an identification number instead), the animal's picture (when provided), the animal description (when provided), the inforrmations about age, size, and gender, some tags that desccribe the animal and a contact email so the user can get more informations and adopt the pet.
+
+Then the user can click on the card of the selected animal and be redirected to fill a form for responsible adoption.
