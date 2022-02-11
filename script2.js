@@ -7,7 +7,7 @@ const typeButtonsContainer = document.querySelector('.type-buttons-container');
 const token = {
   "token_type":"Bearer",
   "expires_in":3600,
-  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjMwODE2ZDAwYTFmNzM3NWM1YjY5MmI1ZjhkODI1NTZmY2RjMTNhMGYyMjFlZThlMTRjMDMxNTU5YWVlMmU2N2Q2NjM5Zjg0M2VjNDNmNTM4IiwiaWF0IjoxNjQ0NTMzNzAxLCJuYmYiOjE2NDQ1MzM3MDEsImV4cCI6MTY0NDUzNzMwMSwic3ViIjoiIiwic2NvcGVzIjpbXX0.k8T4Gh09Bfg1phVO2tdxWxK8_O3dEmizC2y4lNlJ5UECNNEKuFOlr93fxQvpDoF1pl7th_LwoPRCrlvKlGccHjV88Zv_a7m0M0CYoBsbN2ee4dPSWC0EG0pPdAOs_xYIvnchs1rvA20ICwgBoOz5EFspBPaXteC4_Vt11F90pbN5W5-jsKIxb5bSMqmy8UplxJ3sKvIp8agkCfH_MFpLkpLy_48m08TVt6HwTYH31HgpWFNLaD4FZWzFn9Ouxb1WshGTBWsrZfok9rdQjXciRILdxDkZXwu2VVQHLi1w2Y0ZxKIszWRx89SYHUnbLIXaP2G1jJmbHMw4pbsd5Tj69w"
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjA2NDQ0NzE0Mzc3ZjBiOTMxYTkyMTRhM2NkNjA3YTI5ZTAwODRmNmVkMjZmYWM1YmIxMmNkNTA0MjE1NmZhNjcwZWUxZGFlYmQ1M2VlYmM0IiwiaWF0IjoxNjQ0NTg3NzA1LCJuYmYiOjE2NDQ1ODc3MDUsImV4cCI6MTY0NDU5MTMwNSwic3ViIjoiIiwic2NvcGVzIjpbXX0.jDExrf4Btn2kgb3rTZ7z3ZbALN1Sf8wB2gY9rzzjIVAlZq05OJJ2XKbLlVSkSFtzbw0YxiuRArRVkllHBcSonQW4HNkuTY6hDKFV_qimi0Rz5zG5NpQP7GXZQstqBCwLQXirPvvNAS4QZTQLWTTx81OUtJ4XWdewDsl_YHIG-VQvhKSTlLL4c54p9m-yTRaL5bedfvN8gytURNwD4Q2pQ2qtN5p-ZgBtBqM7YTeNAGAK2v6rrxLshteyZH_tA5HnJ8Q7LD_Etdhm3KSyRmxw3TX-hIl9QdSqaqg2V6fgXnQBtyUcxHRMwkODjmKx523gPMlkJsHJkewoORA453mYyg",
 }
 
 //REQUESTS
@@ -71,6 +71,13 @@ const createAnimalTags = (animal) => {
   return animalTags;
 }
 
+const clearAnimalsCards = () => {
+  const animalsCards = animalsParent.children;
+  for(let i = animalsCards.length; i > 0; i -= 1) {
+    animalsCards[i-1].remove();
+  }
+}
+
 const createAnimalsCards = (array) => {
   array.forEach((animal) => {
     const newSect = createCustomElement('section', 'animal-card', '');
@@ -89,19 +96,48 @@ const getAllAnimals = async () => {
     const { id, type, breeds, age, gender, size, tags, name, description, photos, status, contact: { email } } = animal;
     return {id, type, breeds, age, gender, size, tags, name, description, photos, status, email};
   });
+  clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
 }
 
-const createTypeButtons = async () => {
-  const data = await getAnimalTypes();
-  const animalTypes = data.types.map((type) => type.name)
-  animalTypes.forEach((type) => typeButtonsContainer.appendChild(createCustomElement('button', 'type-button', type)));
+const getAnimalsByType = async (animalType) => {
+  let query = '';
+  if(animalType) {
+    query = `/?&type=${animalType}`;
+  }
+  const fetchedAnimals = await fetchApi(`${baseUrl}${query}`);
+  const returnedAnimals = fetchedAnimals.animals.map((animal) => {
+    const { id, type, breeds, age, gender, size, tags, name, description, photos, status, contact: { email } } = animal;
+    return {id, type, breeds, age, gender, size, tags, name, description, photos, status, email};
+  });
+  clearAnimalsCards();
+  createAnimalsCards(returnedAnimals);
 }
 
-createTypeButtons();
+const selectType = (event) => {
+  const type = event.target.innerText;
+  getAnimalsByType(type);
+};
+  
+
+const createTypeButtons = async () => {
+  const allButton = createCustomElement('button', 'type-button', 'Todos os tipos');
+  allButton.addEventListener('click', getAllAnimals);
+  typeButtonsContainer.appendChild(allButton);
+  const data = await getAnimalTypes();
+  const animalTypes = data.types.map((type) => type.name)
+  animalTypes.forEach((type) => {
+    const button = createCustomElement('button', 'type-button', type);
+    button.addEventListener('click', selectType);
+    typeButtonsContainer.appendChild(button);
+    });
+}
+
+//createTypeButtons();
 
 window.onload = async () => {
   animalsParent.innerHTML = '';
+  createTypeButtons();
   getAllAnimals();
 }
 
