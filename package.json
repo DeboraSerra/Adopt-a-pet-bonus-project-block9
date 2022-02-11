@@ -1,0 +1,26 @@
+{
+  "name": "recipe-app-bonus-project-block9",
+  "version": "1.0.0",
+  "description": "Esse projeto foi desenvolvido em conjunto pelos desenvolvedores: * [Débora Rodrigues Serra](https://github.com/DeboraSerra/Trybe-exercicios), * [Elias Galindo](https://github.com/EliasGalindo0/trybe-exercicios), * [Marcelo Alexandre](https://github.com/marceloalexandredacunhasimao/trybe-exercicios), * [Rafael Friedel](https://github.com/Rafael-Friedel/Trybe-Exercises).",
+  "main": "script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeboraSerra/Recipe-app-bonus-project-block9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeboraSerra/Recipe-app-bonus-project-block9/issues"
+  },
+  "homepage": "https://github.com/DeboraSerra/Recipe-app-bonus-project-block9#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

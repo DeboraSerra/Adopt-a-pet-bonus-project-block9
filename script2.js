@@ -7,7 +7,7 @@ const typeButtonsContainer = document.querySelector('.type-buttons-container');
 const token = {
   "token_type":"Bearer",
   "expires_in":3600,
-  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjA2NDQ0NzE0Mzc3ZjBiOTMxYTkyMTRhM2NkNjA3YTI5ZTAwODRmNmVkMjZmYWM1YmIxMmNkNTA0MjE1NmZhNjcwZWUxZGFlYmQ1M2VlYmM0IiwiaWF0IjoxNjQ0NTg3NzA1LCJuYmYiOjE2NDQ1ODc3MDUsImV4cCI6MTY0NDU5MTMwNSwic3ViIjoiIiwic2NvcGVzIjpbXX0.jDExrf4Btn2kgb3rTZ7z3ZbALN1Sf8wB2gY9rzzjIVAlZq05OJJ2XKbLlVSkSFtzbw0YxiuRArRVkllHBcSonQW4HNkuTY6hDKFV_qimi0Rz5zG5NpQP7GXZQstqBCwLQXirPvvNAS4QZTQLWTTx81OUtJ4XWdewDsl_YHIG-VQvhKSTlLL4c54p9m-yTRaL5bedfvN8gytURNwD4Q2pQ2qtN5p-ZgBtBqM7YTeNAGAK2v6rrxLshteyZH_tA5HnJ8Q7LD_Etdhm3KSyRmxw3TX-hIl9QdSqaqg2V6fgXnQBtyUcxHRMwkODjmKx523gPMlkJsHJkewoORA453mYyg",
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjVhNDg5MWU0N2M3MDdlYmE5OTg1YWRjMjc4YjNmZWEwZjNjYjFjZTg3ZTY3MTY3NzRmZjc4NGI0ZjZmZDAwOTQ2NmE0NDFmMjNhOTdjM2FiIiwiaWF0IjoxNjQ0NTkyNTU1LCJuYmYiOjE2NDQ1OTI1NTUsImV4cCI6MTY0NDU5NjE1NSwic3ViIjoiIiwic2NvcGVzIjpbXX0.JqYHI--5xuJPJ9ZpKHQLn2rm8m6-ABR64L-3-pp55kSVeNwPBpT3l1WNpU6WG8ku3w75SYRU_TZ6NJnO_TYixfEpWHJp6CKQnQsSGg7-qOQZz1H_5LY2OQ0t2quXQROZ9ve3eFkXF-Ff-gvowp2-uKiNGBRrxSRESxM2w_XM0MrEsE8M0Fhafl4RrCjmj3Eu0WtaU5UEiGOp90TtYrGeG70Zzq0cskEl4ZVxaMw7NbEyDvplC6LJmZ_ZaDBtBo6B0UxDyl9mlqmw64CE2q7eCY5wxa-A4uD2YusU1xhvxYJlR1b0qYPsASGnibVys5vcg4V-8EhFLWD78odt1oBLIA",
 }
 
 //REQUESTS
@@ -24,7 +24,7 @@ const fetchApi = async (url) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    animalsParent.innerHTML = 'Banco de dados fora do ar...'
+    console.log(error);
   }
 }
 
@@ -94,10 +94,12 @@ const getAllAnimals = async () => {
   const fetchedAnimals = await fetchApi(baseUrl);
   const returnedAnimals = fetchedAnimals.animals.map((animal) => {
     const { id, type, breeds, age, gender, size, tags, name, description, photos, status, contact: { email } } = animal;
-    return {id, type, breeds, age, gender, size, tags, name, description, photos, status, email};
+    const animalInfo = {id, type, breeds, age, gender, size, tags, name, description, photos, status, email};
+    return animalInfo;
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
+  return returnedAnimals[0];
 }
 
 const getAnimalsByType = async (animalType) => {
@@ -126,11 +128,14 @@ const createTypeButtons = async () => {
   typeButtonsContainer.appendChild(allButton);
   const data = await getAnimalTypes();
   const animalTypes = data.types.map((type) => type.name)
+  const buttons = [];
   animalTypes.forEach((type) => {
     const button = createCustomElement('button', 'type-button', type);
     button.addEventListener('click', selectType);
     typeButtonsContainer.appendChild(button);
-    });
+    buttons.push(button.innerText)
+  });
+  return { animalTypes, buttons };
 }
 
 //createTypeButtons();
@@ -139,6 +144,12 @@ window.onload = async () => {
   animalsParent.innerHTML = '';
   createTypeButtons();
   getAllAnimals();
+}
+
+module.exports = {
+  createAnimalsCards,
+  createTypeButtons,
+  getAllAnimals
 }
 /*
     "animals": [
