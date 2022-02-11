@@ -67,3 +67,76 @@ footer{
 .d-block {
   max-height: 40%;
 }
+
+.form-section {
+  width: 90%;
+  margin: auto;
+}
+
+.form {
+  padding: 15px;
+}
+
+.intrested-part, .animal-part {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+}
+
+legend {
+  text-align: center;
+  padding: 5px;
+  margin: 10px;
+}
+
+.intrested-part {
+  flex-direction: column;
+  align-items: center;
+}
+
+#endereco {
+  align-self: stretch;
+}
+
+input[type=text], input[type=email] {
+  margin: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 50%;
+  resize: none;
+}
+
+.living-type {
+  margin: 10px;
+  padding: 5px;
+}
+
+input[type=radio] {
+  margin: 5px;
+  padding: 2px;
+}
+
+.confirmation-section {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type=checkbox] {
+  margin: 5px;
+  padding: 2px;
+}
+
+.send-form {
+  margin: 10px;
+  padding: 5px;
+}
