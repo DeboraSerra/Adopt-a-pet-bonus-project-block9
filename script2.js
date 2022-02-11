@@ -1,5 +1,5 @@
 const baseUrl = 'https://api.petfinder.com/v2/animals';
-const urlByType = `https://api.petfinder.com/v2/types/`;
+// const urlByType = `https://api.petfinder.com/v2/types/`;
 const urlToFindTypes = 'https://api.petfinder.com/v2/types';
 const animalsParent = document.querySelector('.animals-parent');
 const typeButtonsContainer = document.querySelector('.type-buttons-container');
