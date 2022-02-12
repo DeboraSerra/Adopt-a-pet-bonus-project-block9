@@ -18,7 +18,9 @@ p {
 
 .type-buttons-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   margin-bottom: 5px;
   background-color: rgb(54, 54, 54);
   max-width: 100%;
@@ -26,13 +28,16 @@ p {
 
 .btn-dark {
   margin: 4px;
+  min-width: 100px;
   border-radius: 8px;
-  padding: 2px;
-  font-size: 10px;
+  padding: 4px;
+  font-size: 1.1rem;
+  box-shadow: 0 0 30px rgb(68, 68, 68);
 }
 
 .animals-parent {
   padding: 110px;
+  margin-top: 25px;
   display: flex;
   max-width: 100%;
   justify-content: space-evenly;
@@ -76,13 +81,14 @@ p {
   width: 90%;
   margin: auto;
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .form-title {
-  font-size: 15px;
+  font-size: 1.5rem;
   border-radius: 15px;
   text-align: center;
+  padding: 8px;
 }
 
 .apear {
@@ -99,6 +105,14 @@ p {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  width: 90%;
+  font-size: 1.2rem;
+}
+
+input[type=radio] {
+  margin: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 legend {
@@ -118,6 +132,7 @@ legend {
 
 textarea {
   width: 80%;
+  height:   100px;
   resize: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -125,6 +140,7 @@ textarea {
 
 .confirmation-section {
   text-align: center;
+  font-size: 1.1rem;
 }
 
 .form {
@@ -136,12 +152,15 @@ textarea {
 .send-form {
   margin: 10px;
   padding: 5px;
+  font-size: 1.1rem;
 }
 
 .close-btn {
   position: absolute;
+  min-width: 30px;
+  text-align: center;
   right: 0px;
-  top: -8px;
+  top: -2px;
   padding: 5px;
   font-size: 1.5rem;
   cursor: pointer;
@@ -149,20 +168,25 @@ textarea {
 
 .pet-info {
   display: flex;
-  flex-direction: column;
-  width: 50%;
+  flex-flow: row wrap;
+  width: 100%;
 }
 
 .pet-info input {
-  width: 90%;
+  width: 100%;
+  margin-right: 40px;
+  margin-top: 5px;
 }
 
 #porte-pet {
-  width: 370px;
+  width: 100%;
+  margin-top: 5px;
+  margin-right: 40px;
 }
 
 .name-email {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 

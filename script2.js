@@ -143,9 +143,12 @@ const createAnimalsCards = (array) => {
   array.forEach((animal) => {
     const newSect = createCustomElement('section', 'card-body', '');
     newSect.id = animal.id;
+    const anchor = createCustomElement('a', 'go-to-form', 'Preencha o formulário!');
+    anchor.href = '#our-form';
     newSect.addEventListener('click', selectAnimal);
     const animalTags = createAnimalTags(animal);
     animalTags.forEach((eachAnimal) => newSect.appendChild(eachAnimal));
+    newSect.appendChild(anchor);
     animalsParent.appendChild(newSect);
   });
 };
