@@ -1,5 +1,7 @@
 # Adopt a Pet - Bonus project - Block9
 
+![Gif do funcionamento da aplicação (Gif of how the application works)](https://github.com/DeboraSerra/Recipe-app-bonus-project-block9/blob/main/midia/Bonus-project-adopt-a-pet.gif)
+
 Esse projeto foi desenvolvido em conjunto pelos desenvolvedores:
 * [Débora Rodrigues Serra](https://github.com/DeboraSerra/Trybe-exercicios),
 * [Elias Galindo](https://github.com/EliasGalindo0/trybe-exercicios),
