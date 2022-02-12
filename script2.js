@@ -187,7 +187,7 @@ const getAllAnimals = async () => {
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
-  return returnedAnimals[0];
+  return returnedAnimals;
 };
 
 const getAnimalsByType = async (animalType) => {
@@ -228,6 +228,7 @@ const getAnimalsByType = async (animalType) => {
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
+  return returnedAnimals;
 };
 
 const selectType = (event) => {
@@ -263,6 +264,8 @@ module.exports = {
   createAnimalsCards,
   createTypeButtons,
   getAllAnimals,
+  getAnimalsByType,
+  token,
 };
 
 /* 'animals': [
