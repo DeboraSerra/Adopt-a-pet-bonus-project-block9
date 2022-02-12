@@ -2,8 +2,9 @@
  * @jest-environment jsdom
  */
 
-const fs = require("fs");
-const text = fs.readFileSync("./index.html");
+const fs = require('fs');
+
+const text = fs.readFileSync('./index.html');
 document.body.innerHTML = text;
 
 require('../mocks/fetchSimulator');

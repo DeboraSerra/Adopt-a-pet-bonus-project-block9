@@ -1,13 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-const fs = require("fs");
-const text = fs.readFileSync("./index.html");
+const fs = require('fs');
+
+const text = fs.readFileSync('./index.html');
 document.body.innerHTML = text;
 
- require('../mocks/fetchSimulator');
- const { fetchAnimal } = require('../mocks/allAnimals');
- const { types } = require('../mocks/typesOfAnimals');
+require('../mocks/fetchSimulator');
 const { createTypeButtons } = require('../script2');
 
 describe('Testa a função createTypeButtons', () => {
@@ -20,7 +19,7 @@ describe('Testa a função createTypeButtons', () => {
     const expected = ['Todos os tipos', 'Todos os tipos', 'Dog', 'Cat', 'Rabbit', 'Small & Furry', 'Horse', 'Bird', 'Scales, Fins & Other', 'Barnyard'];
     const buttons = document.getElementsByClassName('btn-dark');
     const buttonsText = Array.from(buttons)
-      .filter((button) => button.innerText? true:false)
+      .filter((button) => button.innerText)
       .map((button) => button.innerText);
     expect(buttonsText).toEqual(expected);
   });
