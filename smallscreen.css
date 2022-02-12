@@ -1,0 +1,187 @@
+@media only screen and (max-width: 600px) {
+
+h1 {
+  background-color: rgb(54, 54, 54);
+  text-align: center;
+  margin: 0;
+  color: rgb(248, 244, 244);
+}
+
+p {
+  font-size: medium;
+}
+
+.btn-link {
+  text-align: center;
+  margin: 0;
+}
+
+.type-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  background-color: rgb(54, 54, 54);
+  max-width: 100%;
+}
+
+.btn-dark {
+  margin: 4px;
+  border-radius: 8px;
+  padding: 2px;
+  font-size: 10px;
+}
+
+.animals-parent {
+  padding: 110px;
+  display: flex;
+  max-width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items:stretch;
+}
+
+.card-body {
+  background-color: antiquewhite;
+  width: 15rem;
+  max-height: 40rem;
+  margin: 8px;
+  border: 1px solid gray;
+  background-color: rgba(195, 194, 194, 0.637);
+  border-radius: 20px;
+  align-self: auto;
+  box-shadow: 0 0 50px gray;
+}
+
+.card-body img {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.card-body:hover {
+  background-color: rgb(168, 167, 167);
+}
+
+.card-text {
+  margin: 0 5px 0 5px;
+  text-align: justify;
+  font-size: 15px;
+}
+
+.d-block {
+  max-height: 40%;
+}
+
+.form-section {
+  display: none;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.form-title {
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.apear {
+  display: block;
+  position: absolute;
+  background-color: gray;
+  border-radius: 15px;
+  color: white;
+  text-shadow: 0 0 15px black;
+  transition: 2s;
+}
+
+.intrested-part, .animal-part {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+legend {
+  text-align: center;
+}
+
+.intrested-part {
+  flex-direction: column;
+  align-items: center;
+}
+
+#endereco {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  width: 80%;
+  resize: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.confirmation-section {
+  text-align: center;
+}
+
+.form {
+  font-size: 10px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.send-form {
+  margin: 10px;
+  padding: 5px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0px;
+  top: -8px;
+  padding: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.pet-info {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.pet-info input {
+  width: 90%;
+}
+
+#porte-pet {
+  width: 370px;
+}
+
+.name-email {
+  display: flex;
+  width: 100%;
+}
+
+.name-email input {
+  width: 100%;
+  margin: 0;
+}
+
+.card-title {
+  text-align: center;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color:rgba(177, 177, 177, 0.5);
+}
+
+}
