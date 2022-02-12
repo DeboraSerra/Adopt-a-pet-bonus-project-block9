@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  background-color: rgb(228, 228, 228);
+}
+
 h1 {
   background-color: rgb(54, 54, 54);
   text-align: center;
@@ -55,8 +59,20 @@ footer{
   max-height: 50rem;
   margin: 8px;
   border: 1px solid gray;
+  background-color: rgba(195, 194, 194, 0.637);
   border-radius: 20px;
   align-self: auto;
+  cursor: pointer;
+  box-shadow: 0 0 50px gray;
+}
+
+.card-body img {
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.card-body:hover {
+  background-color: rgb(168, 167, 167);
 }
 
 .card-text {
@@ -69,8 +85,27 @@ footer{
 }
 
 .form-section {
+  display: none;
   width: 90%;
   margin: auto;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.form-title {
+  border-radius: 15px;
+}
+
+.apear {
+  display: block;
+  position: absolute;
+  background-color: gray;
+  top: 130px;
+  left: 100px;
+  border-radius: 15px;
+  color: white;
+  text-shadow: 0 0 15px black;
+  transition: 2s;
 }
 
 .form {
@@ -97,18 +132,21 @@ legend {
 }
 
 #endereco {
-  align-self: stretch;
+  width: 76%;
 }
 
 input[type=text], input[type=email] {
   margin: 20px;
   padding: 5px;
   border-radius: 5px;
+  font-size: 1.2em;
 }
 
 textarea {
   width: 50%;
   resize: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
 }
 
 .living-type {
@@ -118,7 +156,7 @@ textarea {
 
 input[type=radio] {
   margin: 5px;
-  padding: 2px;
+  padding: 5px;
 }
 
 .confirmation-section {
@@ -139,4 +177,49 @@ input[type=checkbox] {
 .send-form {
   margin: 10px;
   padding: 5px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0px;
+  top: -8px;
+  padding: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.pet-info {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.pet-info input {
+  width: 90%;
+}
+
+#porte-pet {
+  width: 370px;
+}
+
+.name-email {
+  display: flex;
+  width: 80%;
+}
+
+.name-email input {
+  width: 90%;
+}
+
+.card-title {
+  text-align: center;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color:rgba(177, 177, 177, 0.5);
 }

@@ -2,11 +2,20 @@ const baseUrl = 'https://api.petfinder.com/v2/animals';
 const urlToFindTypes = 'https://api.petfinder.com/v2/types';
 const animalsParent = document.querySelector('.animals-parent');
 const typeButtonsContainer = document.querySelector('.type-buttons-container');
+const form = document.querySelector('.form-section');
+const namePet = document.querySelector('#name-pet');
+const idPet = document.querySelector('#id-pet');
+const speciePet = document.querySelector('#especie-pet');
+const breedPet = document.querySelector('#raça-pet');
+const agePet = document.querySelector('#idade-pet');
+const genderPet = document.querySelector('#genero-pet');
+const sizePet = document.getElementById('porte-pet');
+const closeForm = document.querySelector('.close-btn');
 
 const token = {
-  "token_type":"Bearer",
-  "expires_in":36000,
-  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImU0MDIxNzJkODY3OWU0MTE1ZmMzNzBmYzAxN2U2YmQ5OTYyMzExZjU3MmU3ZmJjNDk4MTA3OTkzMTg5YzI5ZjVjYTJiMzdjY2VjYTkwOWI4IiwiaWF0IjoxNjQ0NjEzOTk5LCJuYmYiOjE2NDQ2MTM5OTksImV4cCI6MTY0NDYxNzU5OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.RzR9Qq5f5hYmC_P8m6faarJRf2EFNydK2JEf6ko5w5hljqQ7-aD7zJ7lp-tunvXU846Lu6XU-xM6g_zB7b8yG26xAyF98Lh219gREOlA95Dz9KM7ig1soElCyaJIDdlKdKuPnuhHUEV1UiDVW6gfTX5YrXSohPdr3vuyyeeRbQRGISmbbiF0J9L4_gx5qNgoP0tXgxk7o0dayZmduabQPPgBDiefhJEvmxn2dp2ymk9xZBe4rVMnGEvyymhcdmTwpnuLXQPszDf3XNDRqie4gve1T0-b3LwVLZ-bKv8o4dtInG9EDS1dFN5VOnYZ94YwzNmQfafbxkGR_2eudDuSCA",
+  token_type: 'Bearer',
+  expires_in: 36000,
+  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImZmN2E2ZmI2ZjcyNzk2YzYxMGJlYmY2OTIxYzI5YWY0NTM0YzUzMDc5MjMyMzAzZmRiYmZhYmNhMGI2NGM1MjlhOTUxNDAwZTg5ZDhlZTU3IiwiaWF0IjoxNjQ0NjIzNTg2LCJuYmYiOjE2NDQ2MjM1ODYsImV4cCI6MTY0NDYyNzE4Niwic3ViIjoiIiwic2NvcGVzIjpbXX0.BnkYrPxn2a5Wu3dcpuX42EGXbUwXu777McFA3KlniahXmG_jvvH9dGNPDJS8byX-r4sBXLL2Zuf20bVmLhMZMAP0-FrUQRSsBFNRlDH2mxDd3Ozsj53VMFy201JrW5HmhtGxmj6jfio2E_qAS3A16u0zPnIFW_qqOUukHYeMvlyvm_AQrLu2yvodl77QLuqx8q5YDcEDeux7oMd3Kj6Pzqk2eSTHiHXpGvU9RHHdie_zgjLHRTKrFvf55K7SE8Xeslaa6k-QoB7IMKS8Vvnw1MV_ACi9QQihuTNXxj7Q5gQjz3SJBZCHy2frfx_Y6r4xnIo0ndnuf9943aEVJHTtvw',
 };
 
 // REQUESTS
@@ -74,12 +83,12 @@ const createAnimalTags = (animal) => {
   const animalTags = [];
   animalTags.push(createCustomElement('h2', 'card-title', name));
   if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'rounded mx-auto d-block', animal.name));
-  if (description) animalTags.push(createCustomElement('p', 'card-text', description));
-  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ', ' + breeds.secondary : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
-  animalTags.push(createCustomElement('p', 'card-text', dataText));
-  animalTags.push(createCustomElement('p', 'card-text', tags.join(', ')));
-  animalTags.push(createCustomElement('p', 'card-text', status));
-  animalTags.push(createCustomElement('p','btn btn-link', `Me adote! ${email}`));
+  if (description) animalTags.push(createCustomElement('p', 'card-text description', description));
+  const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ` e ${breeds.secondary}` : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
+  animalTags.push(createCustomElement('p', 'card-text data', dataText));
+  animalTags.push(createCustomElement('p', 'card-text tags', tags.join(', ')));
+  animalTags.push(createCustomElement('p', 'card-text status', status));
+  animalTags.push(createCustomElement('p', 'btn btn-link', `Me adote! ${email}`));
   return animalTags;
 };
 
@@ -90,14 +99,55 @@ const clearAnimalsCards = () => {
   }
 };
 
+const getElementOrClosest = (sectionClass, target) => {
+  if (target.classList.contains(sectionClass)) {
+    return target;
+  }
+  return target.closest(sectionClass);
+};
+
+const fillForm = (obj) => {
+  const {
+    name, id, specie, breed, age, gender, size,
+  } = obj;
+  namePet.value = name;
+  idPet.value = id;
+  speciePet.value = specie;
+  breedPet.value = breed;
+  agePet.value = age;
+  genderPet.value = gender;
+  sizePet.value = size;
+};
+
+const selectAnimal = ({ target }) => {
+  const clicked = getElementOrClosest('.card-body', target);
+  form.classList.add('apear');
+  const name = clicked.querySelector('.card-title').innerText;
+  const { id } = clicked;
+  const text = clicked.querySelector('.data').innerText;
+  const data = text.split(', ');
+  const specie = data[0].split('Tipo: ')[1];
+  const breed = data[1].split('Raça: ')[1];
+  const age = data[2].split('Idade: ')[1];
+  const gender = data[3].split('Sexo: ')[1];
+  const size = data[4].split('Porte: ')[1];
+  const obj = {
+    name, id, specie, breed, age, gender, size,
+  };
+  fillForm(obj);
+};
+
+closeForm.addEventListener('click', () => form.classList.remove('apear'));
+
 const createAnimalsCards = (array) => {
   array.forEach((animal) => {
     const newSect = createCustomElement('section', 'card-body', '');
     newSect.id = animal.id;
+    newSect.addEventListener('click', selectAnimal);
     const animalTags = createAnimalTags(animal);
     animalTags.forEach((eachAnimal) => newSect.appendChild(eachAnimal));
     animalsParent.appendChild(newSect);
-  })
+  });
 };
 
 // HANDLERS
@@ -178,7 +228,6 @@ const getAnimalsByType = async (animalType) => {
   });
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
-
 };
 
 const selectType = (event) => {
@@ -213,7 +262,7 @@ window.onload = async () => {
 module.exports = {
   createAnimalsCards,
   createTypeButtons,
-  getAllAnimals
+  getAllAnimals,
 };
 
 /* 'animals': [
