@@ -4,7 +4,6 @@ const types = require('./typesOfAnimals');
 const ENDPOINTS = {
   baseUrl: 'https://api.petfinder.com/v2/animals',
   urlToFindTypes: 'https://api.petfinder.com/v2/types',
-  typesUrl: 'https://api.petfinder.com/v2/animals/?&type=Dogs'
 }
 
 const TIME_IN_MILLISECONDS = 200;
@@ -19,8 +18,16 @@ const fetchSimulator = (url) => {
     ok: validUrl,
     json: () => new Promise((resolve) => {
       setTimeout(() => {
-        if (url === ENDPOINTS.baseUrl || url === ENDPOINTS.typesUrl) {
+        if (url === ENDPOINTS.baseUrl) {
           return resolve(fetchAnimals);
+        }
+
+        if (url.includes(`${ENDPOINTS.baseUrl}/?&type=`)) {
+          let fetchAnimalOfType = fetchAnimals;
+          let type = url.split('/?&type=');
+          type = type[1];
+          fetchAnimalOfType.animals = fetchAnimals.animals.filter((animal) => animal.type === type);
+          return resolve(fetchAnimalOfType);
         }
         
         if (url === ENDPOINTS.urlToFindTypes) {
