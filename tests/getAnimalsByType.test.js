@@ -11,8 +11,8 @@ require('../mocks/fetchSimulator');
 const { getAnimalsByType } = require('../script2');
 const { token } = require('../script2');
 
-describe('Testa a função getAnimalsByType', () => {
-  it('Testa se ao chamar função getAnimalsByType com o parâmetro \'Dog\' a função fetch é chamada com os parâmetros corretos', async () => {
+describe('Test the function getAnimalsByType', () => {
+  it('tests if when the function getAnimalsByType is called with the parameter \'Dog\' the fetch function is called with the correct parameters', async () => {
     const url = 'https://api.petfinder.com/v2/animals/?&type=Dog';
     const requestInfo = {
       method: 'GET',
@@ -23,12 +23,12 @@ describe('Testa a função getAnimalsByType', () => {
     await getAnimalsByType('Dog');
     expect(fetch).toHaveBeenCalledWith(url, requestInfo);
   });
-  it('Testa se os objetos do array retornado possuem as chaves corretas', async () => {
+  it('tests if the object of the returned array have the correct keys', async () => {
     const expected = ['id', 'type', 'breeds', 'age', 'gender', 'size', 'tags', 'name', 'description', 'photos', 'status', 'email'];
     const response = await getAnimalsByType('Dog');
     response.forEach((animal) => expect(Object.keys(animal)).toEqual(expected));
   });
-  it('Testa se a função getAnimalsByType ao ser chamada com o parâmetro \'Cat\' retorna apenas os animais do tipo \'Cat\'', async () => {
+  it('tests if when the function getAnimalsByType is called with the parameter \'Cat\' it returns only the animals of the type \'Cat\'', async () => {
     const response = await getAnimalsByType('Cat');
     expect(response.every((animal) => animal.type === 'Cat')).toBe(true);
   });
