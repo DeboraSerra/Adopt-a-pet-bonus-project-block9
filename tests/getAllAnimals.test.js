@@ -11,8 +11,8 @@ require('../mocks/fetchSimulator');
 const { getAllAnimals } = require('../script2');
 const { token } = require('../script2');
 
-describe('Testa a função getAllAnimals', () => {
-  it('Testa se a função getAllAnimals chama a função fetch com os parâmetros corretos', async () => {
+describe('Test the function getAllAnimals', () => {
+  it('tests if the function getAllAnimals calls the function fetch with the correct parameters', async () => {
     const url = 'https://api.petfinder.com/v2/animals';
     const requestInfo = {
       method: 'GET',
@@ -23,7 +23,7 @@ describe('Testa a função getAllAnimals', () => {
     await getAllAnimals();
     expect(fetch).toHaveBeenCalledWith(url, requestInfo);
   });
-  it('Testa se os objetos do array retornado possuem as chaves corretas', async () => {
+  it('tests if the objects of the returned array have the correct keys', async () => {
     const expected = ['id', 'type', 'breeds', 'age', 'gender', 'size', 'tags', 'name', 'description', 'photos', 'status', 'email'];
     const response = await getAllAnimals();
     response.forEach((animal) => expect(Object.keys(animal)).toEqual(expected));
