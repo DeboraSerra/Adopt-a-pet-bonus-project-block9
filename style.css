@@ -51,10 +51,11 @@ footer{
 }
 
 .card-body {
+  background-color: antiquewhite;
   width: 25rem;
   max-height: 50rem;
   margin: 8px;
-  border: 1px solid gray;
+  border:groove;
   border-radius: 20px;
   align-self: auto;
 }
