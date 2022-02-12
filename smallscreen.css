@@ -1,11 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: rgb(228, 228, 228);
-}
+@media only screen and (max-width: 600px) {
 
 h1 {
   background-color: rgb(54, 54, 54);
@@ -14,21 +7,13 @@ h1 {
   color: rgb(248, 244, 244);
 }
 
-header{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999px;
-  box-shadow: 0px 0px 6px 0px rgba(136, 134, 134, 0.5);
+p {
+  font-size: medium;
 }
 
-footer{
-  background-color: rgb(54, 54, 54);
+.btn-link {
   text-align: center;
   margin: 0;
-  padding: 0;
-  color: rgb(248, 244, 244);
 }
 
 .type-buttons-container {
@@ -36,13 +21,14 @@ footer{
   justify-content: center;
   margin-bottom: 5px;
   background-color: rgb(54, 54, 54);
-  width: 100%;
+  max-width: 100%;
 }
 
 .btn-dark {
-  margin: 10px;
+  margin: 4px;
   border-radius: 8px;
-  padding: 5px;
+  padding: 2px;
+  font-size: 10px;
 }
 
 .animals-parent {
@@ -56,19 +42,18 @@ footer{
 
 .card-body {
   background-color: antiquewhite;
-  width: 25rem;
-  max-height: 50rem;
+  width: 15rem;
+  max-height: 40rem;
   margin: 8px;
   border: 1px solid gray;
   background-color: rgba(195, 194, 194, 0.637);
   border-radius: 20px;
   align-self: auto;
-  cursor: pointer;
   box-shadow: 0 0 50px gray;
 }
 
 .card-body img {
-  max-height: 300px;
+  max-height: 200px;
   object-fit: cover;
 }
 
@@ -77,8 +62,9 @@ footer{
 }
 
 .card-text {
-  margin: 15px 35px 8px 35px;
+  margin: 0 5px 0 5px;
   text-align: justify;
+  font-size: 15px;
 }
 
 .d-block {
@@ -94,37 +80,29 @@ footer{
 }
 
 .form-title {
+  font-size: 15px;
   border-radius: 15px;
+  text-align: center;
 }
 
 .apear {
   display: block;
   position: absolute;
   background-color: gray;
-  top: 130px;
-  left: 100px;
   border-radius: 15px;
   color: white;
   text-shadow: 0 0 15px black;
   transition: 2s;
 }
 
-.form {
-  padding: 15px;
-}
-
 .intrested-part, .animal-part {
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
-  margin: auto;
-  justify-content: center;
+  align-items: center;
 }
 
 legend {
   text-align: center;
-  padding: 5px;
-  margin: 10px;
 }
 
 .intrested-part {
@@ -133,31 +111,16 @@ legend {
 }
 
 #endereco {
-  width: 76%;
-}
-
-input[type=text], input[type=email] {
-  margin: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 1.2em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 textarea {
-  width: 50%;
+  width: 80%;
   resize: none;
   border-radius: 5px;
-  font-size: 1.2rem;
-}
-
-.living-type {
-  margin: 10px;
-  padding: 5px;
-}
-
-input[type=radio] {
-  margin: 5px;
-  padding: 5px;
+  font-size: 1rem;
 }
 
 .confirmation-section {
@@ -165,14 +128,9 @@ input[type=radio] {
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-input[type=checkbox] {
-  margin: 5px;
-  padding: 2px;
+  font-size: 10px;
+  text-align: center;
+  max-width: 600px;
 }
 
 .send-form {
@@ -205,11 +163,12 @@ input[type=checkbox] {
 
 .name-email {
   display: flex;
-  width: 80%;
+  width: 100%;
 }
 
 .name-email input {
-  width: 90%;
+  width: 100%;
+  margin: 0;
 }
 
 .card-title {
@@ -223,4 +182,6 @@ footer a {
 
 footer a:hover {
   color:rgba(177, 177, 177, 0.5);
+}
+
 }
