@@ -15,7 +15,7 @@ const closeForm = document.querySelector('.close-btn');
 const token = {
   token_type: 'Bearer',
   expires_in: 36000,
-  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImZhOWFlMjMwY2E4YmZiNjE2Mzg2NWUwMjE3MWExNTZlNTMyNTAyZTY2N2YwMWNkZDcyNzU5OWNkODMxNGZlZjJlYjJiZDE0ODc5Yjk4M2FhIiwiaWF0IjoxNjQ0Njg2MTU5LCJuYmYiOjE2NDQ2ODYxNTksImV4cCI6MTY0NDY4OTc1OSwic3ViIjoiIiwic2NvcGVzIjpbXX0.SN511BVGUMPIV8kuGvuzbSdvjtXOmrKrJRD96KEl1nedco_2-_dR4DAb1fyUb9QdrrX4NgI6Yy4x-a5oWX3tA19NTqxdtMtsvpqkxDZK9u-hNomcJA7dpyaiGz9I1x0YurWBcM_ZddUPOahKX0nvs9yY9jf7XvCtbvx4L0c2w-kIZ53G3un6hsp1WnoSe6zcgYwkAZ4-_sjIEZJkahcopx8jGTf7qeBCRTEDy2cf2XM0k3gQwfF_nCQOAnhQJ6VXXubRY0UDL82pNNajnPvQf8mgwqndFflH9jA-eeEmoKgK-eCEu_wrR_p4uF43VZvkGLklQBdQUFSNO8K-UUVwXQ',
+  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjAyODE5YjQzZWQwZTc2Njc3ZTVlNGE3ZGQyNDdjZmM4YjBmMjQ2NjllMGUwOGQ4ZjQwMjY0YzM2M2Y4ZDU5OTNlNmVhNGQ1ZDM2ZDlkMDZkIiwiaWF0IjoxNjQ0ODQ2NTQ0LCJuYmYiOjE2NDQ4NDY1NDQsImV4cCI6MTY0NDg1MDE0NCwic3ViIjoiIiwic2NvcGVzIjpbXX0.xEvodYFhQA96p30zs47DmYBEyttpTGepV_YRsWi3F-DMraT-8uWAmYLttYocQ_zwUEVrng74VzuO6ZNTgETOZln6YpCUSP1yN-_vadYBq7hO--uqTqHuZMdjOUt8QqvLdqELouJA5PhsnMUJZWNX51sMhROVmhi-MMBgl2veZVZ_-CHrl1vUdD7IDyf63dupje9U0Db2YntmqtfHWqmC9s3ojHwx9wyy968EN0Fw8onrcRgR0kQe8JT-Aqicqpd_FURQ3hVuHLCMCx19zwTU0CFjBhdLOYRKgDhA4kI8sY-WzAUvn-QeOcm27hpEAMyHeT07oa2VV8l5GkCU3g1bSA',
 };
 
 // REQUESTS
@@ -153,41 +153,43 @@ const createAnimalsCards = (array) => {
   });
 };
 
+const desconstructObject = (animal) => {
+  const {
+    id,
+    type,
+    breeds,
+    age,
+    gender,
+    size,
+    tags,
+    name,
+    description,
+    photos,
+    status,
+    contact: { email },
+  } = animal;
+  const animalInfo = {
+    id,
+    type,
+    breeds,
+    age,
+    gender,
+    size,
+    tags,
+    name,
+    description,
+    photos,
+    status,
+    email,
+  };
+  return animalInfo;
+};
+
 // HANDLERS
 
 const getAllAnimals = async () => {
   const fetchedAnimals = await fetchApi(baseUrl);
-  const returnedAnimals = fetchedAnimals.animals.map((animal) => {
-    const {
-      id,
-      type,
-      breeds,
-      age,
-      gender,
-      size,
-      tags,
-      name,
-      description,
-      photos,
-      status,
-      contact: { email },
-    } = animal;
-    const animalInfo = {
-      id,
-      type,
-      breeds,
-      age,
-      gender,
-      size,
-      tags,
-      name,
-      description,
-      photos,
-      status,
-      email,
-    };
-    return animalInfo;
-  });
+  const returnedAnimals = fetchedAnimals.animals.map((animal) => desconstructObject(animal));
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
   return returnedAnimals;
@@ -199,36 +201,7 @@ const getAnimalsByType = async (animalType) => {
     query = `/?&type=${animalType}`;
   }
   const fetchedAnimals = await fetchApi(`${baseUrl}${query}`);
-  const returnedAnimals = fetchedAnimals.animals.map((animal) => {
-    const {
-      id,
-      type,
-      breeds,
-      age,
-      gender,
-      size,
-      tags,
-      name,
-      description,
-      photos,
-      status,
-      contact: { email },
-    } = animal;
-    return {
-      id,
-      type,
-      breeds,
-      age,
-      gender,
-      size,
-      tags,
-      name,
-      description,
-      photos,
-      status,
-      email,
-    };
-  });
+  const returnedAnimals = fetchedAnimals.animals.map((animal) => desconstructObject(animal));
   clearAnimalsCards();
   createAnimalsCards(returnedAnimals);
   return returnedAnimals;
