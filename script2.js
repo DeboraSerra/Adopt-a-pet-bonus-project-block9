@@ -15,7 +15,7 @@ const closeForm = document.querySelector('.close-btn');
 const token = {
   token_type: 'Bearer',
   expires_in: 36000,
-  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjAyODE5YjQzZWQwZTc2Njc3ZTVlNGE3ZGQyNDdjZmM4YjBmMjQ2NjllMGUwOGQ4ZjQwMjY0YzM2M2Y4ZDU5OTNlNmVhNGQ1ZDM2ZDlkMDZkIiwiaWF0IjoxNjQ0ODQ2NTQ0LCJuYmYiOjE2NDQ4NDY1NDQsImV4cCI6MTY0NDg1MDE0NCwic3ViIjoiIiwic2NvcGVzIjpbXX0.xEvodYFhQA96p30zs47DmYBEyttpTGepV_YRsWi3F-DMraT-8uWAmYLttYocQ_zwUEVrng74VzuO6ZNTgETOZln6YpCUSP1yN-_vadYBq7hO--uqTqHuZMdjOUt8QqvLdqELouJA5PhsnMUJZWNX51sMhROVmhi-MMBgl2veZVZ_-CHrl1vUdD7IDyf63dupje9U0Db2YntmqtfHWqmC9s3ojHwx9wyy968EN0Fw8onrcRgR0kQe8JT-Aqicqpd_FURQ3hVuHLCMCx19zwTU0CFjBhdLOYRKgDhA4kI8sY-WzAUvn-QeOcm27hpEAMyHeT07oa2VV8l5GkCU3g1bSA',
+  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjVlMTZjYzExOTEzOWE1NTNmZGVmMmFmMjIxMTgyZDAwZThiNDI0OWJlYjNlMzBkMGI5ZTRiMWU4YzRlNzAzZjU5ZDBlNjM2ZDM0YWQzNjAwIiwiaWF0IjoxNjQ0ODUwMjM3LCJuYmYiOjE2NDQ4NTAyMzcsImV4cCI6MTY0NDg1MzgzNywic3ViIjoiIiwic2NvcGVzIjpbXX0.YEWJDj-nehXLkymPpuj0KDUAFdwdoqEZ3ZvivsQ4kb8Z_zccU_Iz0CDumqq0MLE2GCEiZw6J3ESzma4dGHmMaStii_IUjTf1cZs3zV8dd_f0Y81R-K2y_0JsI6WTAyV7PwokFkScjkPjjig44ds2ubOlphLvbU2L1c1V4ilXZrN2Gj7WD5g680g0DMPB5bM3TY674o_V-jKNFeWYA0GSpqJFP0tmnUcVvM_5dRlhDThk6UiM6sj91TxlqwSd4UpzP3ftVehDvf5mVu2LLQ8-bi7trcJ4mPrW4TGlDwhX9xCvQpDVL0LPw6usayZ873iOpYza5QLblr03K6hKJdXVjQ',
 };
 
 // REQUESTS
@@ -44,9 +44,14 @@ const getAnimalTypes = async () => {
       Authorization: `Bearer ${token.access_token}`,
     },
   };
-  const response = await fetch(urlToFindTypes, requestInfo);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(urlToFindTypes, requestInfo);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    animalsParent.innerHTML = 'Base de dados fora do ar...';
+    return error;
+  }
 };
 
 // HELPERS
@@ -97,6 +102,7 @@ const clearAnimalsCards = () => {
   for (let i = animalsCards.length; i > 0; i -= 1) {
     animalsCards[i - 1].remove();
   }
+  animalsParent.innerHTML = '';
 };
 
 const getElementOrClosest = (sectionClass, target) => {
@@ -198,13 +204,18 @@ const getAllAnimals = async () => {
 const getAnimalsByType = async (animalType) => {
   let query = '';
   if (animalType) {
-    query = `/?&type=${animalType}`;
+    query = `/?&type=${animalType.split(' ').join('')}`;
   }
   const fetchedAnimals = await fetchApi(`${baseUrl}${query}`);
-  const returnedAnimals = fetchedAnimals.animals.map((animal) => desconstructObject(animal));
-  clearAnimalsCards();
-  createAnimalsCards(returnedAnimals);
-  return returnedAnimals;
+  try {
+    const returnedAnimals = fetchedAnimals.animals.map((animal) => desconstructObject(animal));
+    clearAnimalsCards();
+    createAnimalsCards(returnedAnimals);
+    return returnedAnimals;
+  } catch (error) {
+    animalsParent.innerHTML = 'Sinto muito! Nenhum animal do tipo disponível hoje...';
+    return false;
+  }
 };
 
 const selectType = (event) => {
