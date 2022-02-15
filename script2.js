@@ -14,8 +14,8 @@ const closeForm = document.querySelector('.close-btn');
 
 const token = {
   token_type: 'Bearer',
-  expires_in: 36000,
-  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6IjVlMTZjYzExOTEzOWE1NTNmZGVmMmFmMjIxMTgyZDAwZThiNDI0OWJlYjNlMzBkMGI5ZTRiMWU4YzRlNzAzZjU5ZDBlNjM2ZDM0YWQzNjAwIiwiaWF0IjoxNjQ0ODUwMjM3LCJuYmYiOjE2NDQ4NTAyMzcsImV4cCI6MTY0NDg1MzgzNywic3ViIjoiIiwic2NvcGVzIjpbXX0.YEWJDj-nehXLkymPpuj0KDUAFdwdoqEZ3ZvivsQ4kb8Z_zccU_Iz0CDumqq0MLE2GCEiZw6J3ESzma4dGHmMaStii_IUjTf1cZs3zV8dd_f0Y81R-K2y_0JsI6WTAyV7PwokFkScjkPjjig44ds2ubOlphLvbU2L1c1V4ilXZrN2Gj7WD5g680g0DMPB5bM3TY674o_V-jKNFeWYA0GSpqJFP0tmnUcVvM_5dRlhDThk6UiM6sj91TxlqwSd4UpzP3ftVehDvf5mVu2LLQ8-bi7trcJ4mPrW4TGlDwhX9xCvQpDVL0LPw6usayZ873iOpYza5QLblr03K6hKJdXVjQ',
+  expires_in: 3600,
+  access_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ5SUdNUERRNUJmendQWXp2N3dEUWo3Z2N4Y0ZFNWU2VnVYVzZtMHZISHh4cjV2anJBTSIsImp0aSI6ImJjYjJjNmY5MDdkNjQyODE1MzIxNTQwNmMwYjQ3YjU1NTQ4YmFkMDBjZTk5YjkwYTc4NzI3ZTFiYTZjODFlODE3OTBiNjQ4MDVkNGY1YmNmIiwiaWF0IjoxNjQ0OTU0Nzk4LCJuYmYiOjE2NDQ5NTQ3OTgsImV4cCI6MTY0NDk1ODM5OCwic3ViIjoiIiwic2NvcGVzIjpbXX0.o6eakZv6XIqVkZH7q7RqcHv2kQLIfEdoKUT8G4LVHiFlAV0cbFQifFR3m01SxUIbn77S8E0ktU3PQ-wAEdrCb4Qtm8NeKCtmy0qodgGFmdHCVZdKqDEjlTd_wXkubM4plSwsU6bc0UoovLf12krxn3qp-1j2AgDUhif4TftttMYuOSOrmLGFOgxSCVRFblootFcNCj0fWjx1V6Ow6uRkiQ35Fk4A0RKNvXkqalA0lUUxq5cLlvvSihpJKaX0c9QnrJcp_SBc-KPQpg3RR7vJSpqoC2C-6MUCK8HkpPnnr8TLyDFGixdc3ZU3FyJWWWq1IUx5bk749NFBwlzOnzi8GQ',
 };
 
 // REQUESTS
@@ -87,21 +87,17 @@ const createAnimalTags = (animal) => {
   } = animal;
   const animalTags = [];
   animalTags.push(createCustomElement('h2', 'card-title', name));
-  if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'rounded mx-auto d-block', animal.name));
-  if (description) animalTags.push(createCustomElement('p', 'card-text description', description));
+  if (photos.length >= 2) animalTags.push(createImageElement(photos[0].medium, 'card-img', animal.name));
+  if (description) animalTags.push(createCustomElement('p', 'card-text description fs-5', description));
   const dataText = `Tipo: ${type}, Raça: ${breeds.primary}${breeds.secondary ? ` e ${breeds.secondary}` : ''}, Idade: ${age}, Sexo: ${gender}, Porte: ${size}`;
-  animalTags.push(createCustomElement('p', 'card-text data', dataText));
-  animalTags.push(createCustomElement('p', 'card-text tags', tags.join(', ')));
-  animalTags.push(createCustomElement('p', 'card-text status', status));
-  animalTags.push(createCustomElement('p', 'btn btn-link', `Me adote! ${email}`));
+  animalTags.push(createCustomElement('p', 'card-text data fs-5', dataText));
+  animalTags.push(createCustomElement('p', 'card-text tags fs-5', tags.join(', ')));
+  animalTags.push(createCustomElement('p', 'card-text status fs-5', status));
+  animalTags.push(createCustomElement('p', 'card-text fs-5', `Me adote! ${email}`));
   return animalTags;
 };
 
 const clearAnimalsCards = () => {
-  const animalsCards = animalsParent.children;
-  for (let i = animalsCards.length; i > 0; i -= 1) {
-    animalsCards[i - 1].remove();
-  }
   animalsParent.innerHTML = '';
 };
 
@@ -147,14 +143,16 @@ closeForm.addEventListener('click', () => form.classList.remove('apear'));
 
 const createAnimalsCards = (array) => {
   array.forEach((animal) => {
-    const newSect = createCustomElement('section', 'card-body', '');
-    newSect.id = animal.id;
-    const anchor = createCustomElement('a', 'go-to-form', 'Preencha o formulário!');
+    const newSect = createCustomElement('section', 'card col-sm-6 col-md-5 col-lg-4 border rounded-4 bg-primary bg-gradient shadow-lg bg-opacity-75', '');
+    const cardBody = createCustomElement('section', 'card-body row rounded', '');
+    cardBody.id = animal.id;
+    newSect.appendChild(cardBody);
+    const anchor = createCustomElement('a', 'go-to-form text-reset', 'Preencha o formulário!');
     anchor.href = '#our-form';
-    newSect.addEventListener('click', selectAnimal);
+    cardBody.addEventListener('click', selectAnimal);
     const animalTags = createAnimalTags(animal);
-    animalTags.forEach((eachAnimal) => newSect.appendChild(eachAnimal));
-    newSect.appendChild(anchor);
+    animalTags.forEach((eachAnimal) => cardBody.appendChild(eachAnimal));
+    cardBody.appendChild(anchor);
     animalsParent.appendChild(newSect);
   });
 };
@@ -224,14 +222,14 @@ const selectType = (event) => {
 };
 
 const createTypeButtons = async () => {
-  const allButton = createCustomElement('button', 'btn btn-dark', 'Todos os tipos');
+  const allButton = createCustomElement('button', 'btn btn-outline-primary shadow-lg col-4 col-sm-3 col-md-2 col-lg-1', 'Todos os tipos');
   allButton.addEventListener('click', getAllAnimals);
   typeButtonsContainer.appendChild(allButton);
   const data = await getAnimalTypes();
   const animalTypes = data.types.map((type) => type.name);
   const buttons = [];
   animalTypes.forEach((type) => {
-    const button = createCustomElement('button', 'btn btn-dark', type);
+    const button = createCustomElement('button', 'btn btn-outline-primary col-4 col-sm-3 col-md-2 col-lg-1', type);
     button.addEventListener('click', selectType);
     typeButtonsContainer.appendChild(button);
     buttons.push(button.innerText);

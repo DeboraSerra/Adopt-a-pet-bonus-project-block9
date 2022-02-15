@@ -1,89 +1,53 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background-color: rgb(228, 228, 228);
-}
-
-h1 {
-  background-color: rgb(54, 54, 54);
-  text-align: center;
-  margin: 0;
-  color: rgb(248, 244, 244);
+  width: 100%;
 }
 
 header{
+  box-shadow: 0px 0px 6px rgba(136, 134, 134, 0.5);
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  z-index: 999px;
-  box-shadow: 0px 0px 6px 0px rgba(136, 134, 134, 0.5);
+  z-index: 1;
+  background-color: rgb(120, 190, 230);
 }
 
-footer{
-  background-color: rgb(54, 54, 54);
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  color: rgb(248, 244, 244);
-}
-
-.type-buttons-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
-  background-color: rgb(54, 54, 54);
-  width: 100%;
-}
-
-.btn-dark {
-  margin: 10px;
-  border-radius: 8px;
-  padding: 5px;
+main {
+  margin: 170px 0 50px;
 }
 
 .animals-parent {
-  padding: 110px;
-  display: flex;
-  max-width: 100%;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items:stretch;
+  width: 100%;
 }
 
-.card-body {
-  background-color: antiquewhite;
-  width: 25rem;
-  max-height: 50rem;
-  margin: 8px;
-  border: 1px solid gray;
-  background-color: rgba(195, 194, 194, 0.637);
-  border-radius: 20px;
-  align-self: auto;
+.card {
+  max-width: 400px;
+}
+
+.btn {
+  margin: 10px;
+}
+
+.card {
+  color: white;
   cursor: pointer;
-  box-shadow: 0 0 50px gray;
 }
 
-.card-body img {
-  max-height: 300px;
-  object-fit: cover;
+.card:hover {
+  color: black;
 }
 
-.card-body:hover {
-  background-color: rgb(168, 167, 167);
-}
-
-.card-text {
-  margin: 15px 35px 8px 35px;
-  text-align: justify;
-}
-
-.d-block {
-  max-height: 40%;
+.go-to-form {
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+  margin: auto;
 }
 
 .form-section {
@@ -94,33 +58,19 @@ footer{
   font-size: 1.2rem;
 }
 
-.form-title {
-  border-radius: 15px;
-}
-
 .apear {
   display: block;
   position: absolute;
-  background-color: gray;
-  top: 130px;
+  top: 160px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 15px;
   color: white;
-  text-shadow: 0 0 15px black;
   transition: 2s;
 }
 
 .form {
   padding: 15px;
-}
-
-.intrested-part, .animal-part {
-  display: flex;
-  flex-wrap: wrap;
-  width: 70%;
-  margin: auto;
-  justify-content: center;
 }
 
 legend {
@@ -129,37 +79,8 @@ legend {
   margin: 10px;
 }
 
-.intrested-part {
-  flex-direction: column;
-  align-items: center;
-}
-
-#endereco {
-  width: 76%;
-}
-
-input[type=text], input[type=email] {
-  margin: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 1.2em;
-}
-
 textarea {
-  width: 50%;
   resize: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
-}
-
-.living-type {
-  margin: 10px;
-  padding: 5px;
-}
-
-input[type=radio] {
-  margin: 5px;
-  padding: 5px;
 }
 
 .confirmation-section {
@@ -172,69 +93,68 @@ input[type=radio] {
   align-items: center;
 }
 
-input[type=checkbox] {
-  margin: 5px;
-  padding: 2px;
-}
-
-.send-form {
-  margin: 10px;
-  padding: 5px;
-}
-
 .close-btn {
   position: absolute;
-  right: 0px;
-  top: -8px;
+  right: 2px;
+  top: 0px;
   padding: 5px;
-  font-size: 1.5rem;
   cursor: pointer;
-}
-
-.pet-info {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.pet-info input {
-  width: 90%;
-}
-
-#porte-pet {
-  width: 370px;
-}
-
-.name-email {
-  display: flex;
-  width: 80%;
-}
-
-.name-email input {
-  width: 90%;
 }
 
 .card-title {
   text-align: center;
 }
 
+footer {
+  background-color: rgb(120, 190, 230);
+}
+
 footer a {
-  color: white;
   text-decoration: none;
 }
 
-footer a:hover {
-  color:rgba(177, 177, 177, 0.5);
+@media screen and (max-width: 576px) {
+  header {
+    position: static;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  main {
+    margin-top: 20px;
+  }
+
+  .apear {
+    top: 370px;
+  }
 }
 
-.go-to-form {
-  color: black;
-  text-decoration: none;
-  display: block;
-  width: fit-content;
-  margin: auto;
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  header {
+    position: static;
+  }
+
+  main {
+    margin-top: 20px;
+  }
+
+  .apear {
+    top: 250px;
+  }
 }
 
-.go-to-form:hover {
-  color: rgb(54, 54, 54);
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  header {
+    position: fixed;
+  }
+
+  main {
+    margin-top: 250px;
+  }
+
+  .apear {
+    top: 250px;
+  }
 }
